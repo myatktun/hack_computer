@@ -11,20 +11,11 @@ CHIP Mux {
     OUT out;
 
     PARTS:
-    Not(in=a, out=notA);
-    Not(in=b, out=notB);
     Not(in=sel, out=notSel);
 
     And(a=b, b=sel, out=outAnd1);
-
-    And(a=a, b=notB, out=AnotB);
-    And(a=AnotB, b=notSel, out=outAnd2);
-
-    And(a=a, b=b, out=AB);
-    And(a=AB, b=notSel, out=outAnd3);
-
-    Or (a=outAnd1, b=outAnd2, out=outOr1);
-    Or (a=outOr1, b=outAnd3, out=out);
+    And(a=a, b=notSel, out=outAnd2);
+    Or (a=outAnd1, b=outAnd2, out=out);
 }
 
 /*
@@ -35,4 +26,7 @@ Canonical Representation
 !abs + abs + a!b!s + ab!s
 bs(!a + a) + a!b!s + ab!s , Distributive
 bs + a!b!s + ab!s, Inverse
+bs + !s(a!b + ab), Distributive
+bs + !s(a (!b + b)), Distributive
+bs + a!s, Inverse
 */
