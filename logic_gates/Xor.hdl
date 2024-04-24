@@ -15,3 +15,12 @@ CHIP Xor {
     Or  (a=a, b=b, out=orOut);
     And (a=nandOut, b=orOut, out=out);
 }
+
+/*
+Canonical Representation
+!ab + a!b
+
+b(!a + !b) + a(!a + !b), Distributive, Inverse
+(!a + !b) (a + b) , Distributive
+!(ab) (a + b) , De Morgan's
+*/
